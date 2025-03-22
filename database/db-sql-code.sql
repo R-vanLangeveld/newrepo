@@ -223,7 +223,7 @@ VALUES (
     50000,
     38522,
     'Red',
-  4
+    4
 ), (
     'Ford',
     'Crown Victoria',
@@ -245,4 +245,8 @@ WHERE inv_id = 10;
 -- Replacing "/images" with "/images/vehicles" 
 UPDATE inventory 
 SET inv_thumbnail = REPLACE(inv_thumbnail, '/images', '/images/vehicles'), 
-inv_image = REPLACE(inv_thumbnail, '/images', '/images/vehicles');
+inv_image = REPLACE(inv_image, '/images', '/images/vehicles');
+
+-- Replace thumnails with full images if needed
+-- UPDATE inventory 
+-- SET inv_image = REPLACE(inv_image, '-tn', '');
