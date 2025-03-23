@@ -5,7 +5,6 @@
 /* ************************
 * Require Statements
 ************************ */
-const PORT = 10000;
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
