@@ -15,6 +15,7 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
 
 /*Try to catch the error getaddrinfo ENOTFOUND */
+
 const axios = require('axios');
 
 axios.get('http://example.com')
@@ -30,7 +31,7 @@ axios.get('http://example.com')
       // Handle other errors
     }
   });
-  
+
 /* ****************************
 * View Engine and Templates
 **************************** */
