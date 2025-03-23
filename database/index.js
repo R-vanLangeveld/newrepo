@@ -28,7 +28,7 @@ if (process.env.NODE_ENV == "development") {
         throw error;
       }
     },
-  }
+  };
 } else {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -36,5 +36,6 @@ if (process.env.NODE_ENV == "development") {
       rejectUnauthorized: true,
     },
   });
+
   module.exports = pool;
 }
