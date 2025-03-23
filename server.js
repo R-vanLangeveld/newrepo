@@ -14,6 +14,23 @@ const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
 
+/*Try to catch the error getaddrinfo ENOTFOUND */
+const axios = require('axios');
+
+axios.get('http://example.com')
+  .then((response) => {
+    // Handle successful response
+  })
+  .catch((error) => {
+    if (error.code === 'ENOTFOUND') {
+      console.error('Hostname not found');
+      // Handle the error or retry the request
+    } else {
+      console.error('An error occurred:', error.message);
+      // Handle other errors
+    }
+  });
+  
 /* ****************************
 * View Engine and Templates
 **************************** */
