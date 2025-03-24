@@ -9,4 +9,6 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build vehicle view
 router.get("/detail/:invId", invController.buildByInventoryId);
 
+// error handling middleware
+
 module.exports = router;

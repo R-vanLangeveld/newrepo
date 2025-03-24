@@ -6,7 +6,7 @@ require("dotenv").config();
 * But will cause problems in production environment
 * If - else will make determination which to use
 **************** */
-let pool
+let pool;
 if (process.env.NODE_ENV == "development") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV == "development") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: true,
+      rejectUnauthorized: false,
     },
   });
 
