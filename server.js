@@ -25,10 +25,15 @@ app.set("layout", "./layouts/layout"); // not at views root
 * Routes
 ************************ */
 app.use(static);
+
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome));
+// app.get("/", utilities.handleErrors(baseController.buildHome));
+app.get("/", baseController.buildHome); //older??? #5 on MVC Implementation 
+//https://byui-cse.github.io/cse340-ww-content/views/mvc-start.html
+
 // Inventory routes
 app.use("/inv", inventoryRoute);
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'});

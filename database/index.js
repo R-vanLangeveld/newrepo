@@ -25,16 +25,13 @@ if (process.env.NODE_ENV == "development") {
         return res;
       } catch (error) {
         console.error("error in query", {text});
-        throw error;
+        throw error
       }
     },
   };
 } else {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    connectionString: process.env.DATABASE_URL
   });
 
   module.exports = pool;
