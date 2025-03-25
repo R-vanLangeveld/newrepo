@@ -18,7 +18,9 @@
     <input type="email" id="account_email" name="account_email" autocomplete="email" required>
   </label>
   <label>Password
-    <input type="password" id="account_password" name="account_password" required>
+    <input type="password" id="account_password" name="account_password" required><!-- pattern="[A-Za-z0-9 \-]{12,}"> -->
   </label>
+  <p>Your password must be at least 12 characters long, contain at least one capital letter, number, and special character.</p>
+  <span id="pswdBtn">Show Password</span>
   <input type="submit" value="Register">
 </form>
