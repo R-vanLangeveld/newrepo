@@ -203,7 +203,7 @@ ul {
   background-color: #bbb;
 }
 
-form, form:valid {
+form, form:valid, form:invalid {
   border: 2px solid #6d6d6d;
   background-color: #263662;
   color: #fff;
@@ -234,7 +234,7 @@ input[type="submit"], input[type="submit"]:valid {
   border: 2px solid #6d6d6d;
 }
 
-:required {
+:invalid {
   border-left: red solid 8px;
 }
 

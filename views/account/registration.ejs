@@ -6,21 +6,28 @@
 } %>
 
 <%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+<% } %>
 
 <form action="/account/register" method="post">
-  <label>First name
+  <label>First name:
     <input type="text" id="account_firstname" name="account_firstname" required>
   </label>
-  <label>Last name
+  <label>Last name:
     <input type="text" id="account_lastname" name="account_lastname" required>
   </label>
-  <label>Email address
+  <label>Email address:
     <input type="email" id="account_email" name="account_email" autocomplete="email" required>
   </label>
-  <label>Password
-    <input type="password" id="account_password" name="account_password" required><!-- pattern="[A-Za-z0-9 \-]{12,}"> -->
+  <label>Password:
+    <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-z0-9])(?!.*\s).{12,}$">
   </label>
-  <p>Your password must be at least 12 characters long, contain at least one capital letter, number, and special character.</p>
+  <p>Your password must be at least 12 characters long, contain at least 1 capital letter, 1 number, and 1 special character.</p>
   <span id="pswdBtn">Show Password</span>
   <input type="submit" value="Register">
 </form>
