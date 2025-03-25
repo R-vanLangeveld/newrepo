@@ -203,7 +203,7 @@ ul {
   background-color: #bbb;
 }
 
-form {
+form, form:valid {
   border: 2px solid #6d6d6d;
   background-color: #263662;
   color: #fff;
@@ -325,5 +325,9 @@ footer {
   .inv_image {
     grid-column: 1/2;
     display: block;
+  }
+
+  form {
+    grid-row: 3/4;
   }
 }
