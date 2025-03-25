@@ -110,7 +110,7 @@ picture img {
 .carInfo {
   background-color: #fffb;
   position: absolute;
-  top: 60px;
+  top: 90px;
   left: 15px;
 }
 
@@ -203,6 +203,42 @@ ul {
   background-color: #bbb;
 }
 
+form {
+  border: thin solid #7d7d7d;
+  background-color: #263662;
+  color: #fff;
+  padding: 10px;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 0.5rem;
+  border: thin solid #6d6d6d;
+  align-self: center;
+}
+
+input[type="submit"] {
+  width: 95px;
+  height: 45px;
+  margin-bottom: 15px;
+}
+
+form p {
+  align-self: center;
+}
+
+form a {
+  color: #fff;
+}
+
 footer {
   padding: 5px;
 }
@@ -230,7 +266,7 @@ footer {
     gap: 10px;
   }
 
-  h1, picture, #inv-display {
+  h1, picture, #inv-display, .notice {
     grid-column: 1/3;
   }
   
@@ -248,12 +284,12 @@ footer {
 
   .reviews {
     grid-column: 2/3;
-    grid-row: 3/4;
+    grid-row: 4/5;
   }
 
   .upgrades {
     grid-column: 1/2;
-    grid-row: 3/4;
+    grid-row: 4/5;
   }
 
   .padding {

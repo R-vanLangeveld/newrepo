@@ -1,0 +1,24 @@
+<!-- Content heading -->
+<% if (title) { %>
+	<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<form method="post">
+  <label>First name
+    <input type="text" id="account_firstname" name="account_firstname" required>
+  </label>
+  <label>Last name
+    <input type="text" id="account_lastname" name="account_lastname" required>
+  </label>
+  <label>Email address
+    <input type="email" id="account_email" name="account_email" autocomplete="email" required>
+  </label>
+  <label>Password
+    <input type="password" id="account_password" name="account_password" required>
+  </label>
+  <input type="submit" value="Register">
+</form>
