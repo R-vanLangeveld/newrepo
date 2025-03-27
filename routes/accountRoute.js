@@ -1,4 +1,4 @@
-// Needed Resources 
+// Required Resources 
 const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities/");
@@ -12,6 +12,9 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/registration", utilities.handleErrors(accountController.buildRegistration));
 
 // Route to process registration
-router.post("/register", regValidate.registrationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount));
+router.post("/registration", regValidate.registrationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount));
+
+// Route to process login
+router.post("/login", regValidate.loginRules(), regValidate.checkRegDataLogin, utilities.handleErrors(accountController.logIn));
 
 module.exports = router;

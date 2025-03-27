@@ -262,6 +262,10 @@ form a {
   font-size: 14px;
 }
 
+.notice {
+  color: #b60000;
+}
+
 footer {
   padding: 5px;
 }

@@ -16,13 +16,13 @@
 
 <form action="/account/register" method="post">
   <label>First name:
-    <input type="text" id="account_firstname" name="account_firstname" required>
+    <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname %>">
   </label>
   <label>Last name:
-    <input type="text" id="account_lastname" name="account_lastname" required>
+    <input type="text" id="account_lastname" name="account_lastname" required value="<%= locals.account_lastname %>">
   </label>
   <label>Email address:
-    <input type="email" id="account_email" name="account_email" autocomplete="email" required>
+    <input type="email" id="account_email" name="account_email" autocomplete="email" required value="<%= locals.account_email %>">
   </label>
   <label>Password:
     <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-z0-9])(?!.*\s).{12,}$">
