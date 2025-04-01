@@ -6,14 +6,14 @@ const Util = {};
 ************************** */
 Util.getNav = async function (req, res, next) {
 	let data = await invModel.getClassifications();
-	let list = "<ul>";
+	let list = '<ul>';
 	list += '<li><a href="/" title="Home page">Home</a></li>';
 	data.rows.forEach((row) => {
-		list += "<li>";
+		list += '<li>';
 		list += `<a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">${row.classification_name}</a>`;
-		list += "</li>";
+		list += '</li>';
 	});
-	list += "</ul>";
+	list += '</ul>';
 	return list;
 }
 
@@ -50,10 +50,10 @@ Util.buildDetailPage = async function(data){
 	let details;
 	data.forEach(info => {
 		details = '<div class="padding">';
-		details += `<picture class="inv_image">`;
+		details += '<picture class="inv_image">';
 		details += `<source media="(min-width: 300px)" srcset="${info.inv_image}">`;
 		details += `<img src="${info.inv_image}" alt="Image of a ${info.inv_color} ${info.inv_make} ${info.inv_model}">`;
-		details += `</picture>`;
+		details += '</picture>';
 		details += '<section>';
 		details += `<h2>${info.inv_make} ${info.inv_model} Details</h2>`;
 		details += `<p><b>Price: $${new Intl.NumberFormat('en-US').format(info.inv_price)}</b></p>`;
@@ -64,6 +64,21 @@ Util.buildDetailPage = async function(data){
 		details += '</div>';
 	});
 	return details;
+}
+
+/* **************************************
+* Build the dynamic drop-down list for the add-inventory view
+************************************** */
+Util.buildClassificationList = async function () {
+	let data = await invModel.getClassifications();
+	let classificationList = '<select name="classification_id" id="classificationList" required>';
+	classificationList += '<option value="">Choose a Classification</option>';
+	data.rows.forEach((row) => {
+		classificationList += `<option value="${row.classification_id}" id="'${row.classification_id}'">${row.classification_name}</option>`;
+		// I couldn't get the if statement to work as intended, so I did it in script.js
+	});
+	classificationList += '</select>';
+	return classificationList;
 }
 
 /* ****************************************

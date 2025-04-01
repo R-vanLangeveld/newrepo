@@ -57,7 +57,6 @@ nav ul {
   align-items: center;
   height: 45px;
   padding: 5px 0;
-  list-style-type: none;
 }
 
 nav li {
@@ -154,6 +153,11 @@ figcaption {
 
 ul {
   padding-left: 20px;
+  list-style-type: none;
+}
+
+.reviews ul {
+  list-style-type: disc;
 }
 
 #inv-display {
@@ -217,7 +221,7 @@ label {
   margin: 10px;
 }
 
-input {
+input, textarea, select {
   width: 100%;
   padding: 5px;
   border-radius: 0.5rem;
@@ -232,6 +236,16 @@ input[type="submit"], input[type="submit"]:valid {
   margin: 10px 0 15px;
   font-size: 16px;
   border: 2px solid #6d6d6d;
+}
+
+#addClassification input[type="submit"] {
+  width: 150px;
+  margin: 5px 0 0;
+}
+
+#addVehicle input[type="submit"] {
+  width: 150px;
+  margin: 5px 0 0;
 }
 
 :invalid {
@@ -293,7 +307,7 @@ footer {
     gap: 10px;
   }
 
-  h1, picture, #inv-display, .notice {
+  h1, picture, #inv-display, .notice, #messages {
     grid-column: 1/3;
   }
   

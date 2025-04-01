@@ -1,0 +1,13 @@
+<!-- Content heading -->
+<% if (title) { %>
+	<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<ul>
+	<li><a href="classification">Add New Classification</a></li>
+	<li><a href="inventory">Add New Vehicle</a></li>
+</ul>
