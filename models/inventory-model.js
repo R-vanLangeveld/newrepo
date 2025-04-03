@@ -8,6 +8,19 @@ async function getClassifications() {
 }
 
 /* ***************************
+* Get specific classification data
+*************************** */
+async function getClassificationName(classification_id) {
+  try {
+    const data = await pool.query("SELECT classification_name FROM classification WHERE classification_id = $1",
+    [classification_id]);
+    return data.rows;
+  } catch (error) {
+    new Error("Get classification_name Error");
+  }
+}
+
+/* ***************************
 *  Get all inventory items and classification_name by classification_id
 *************************** */
 async function getInventoryByClassificationId(classification_id) {
@@ -102,4 +115,4 @@ async function deleteFromInventory(inv_id) {
 	}
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleDataByInventoryId, addNewClassification, addNewVehicle, checkExistingClassification, updateInventory, deleteFromInventory };
+module.exports = { getClassifications, getClassificationName, getInventoryByClassificationId, getVehicleDataByInventoryId, addNewClassification, addNewVehicle, checkExistingClassification, updateInventory, deleteFromInventory };

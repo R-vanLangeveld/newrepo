@@ -39,6 +39,6 @@ router.post("/update", invValidate.addInventoryRules(), invValidate.checkUpdateD
 router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteFromInventoryView));
 
 // Route to process vehicle data edit request
-router.post("/update/", invValidate.addInventoryRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.delelteFromInventory));
+router.post("/delete", utilities.handleErrors(invController.deleteFromInventory));
 
 module.exports = router;
