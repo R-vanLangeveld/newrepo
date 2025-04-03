@@ -26,6 +26,6 @@ if (document.querySelector("h1").textContent === "New Vehicle") {
   });
 
   if (id != null) {
-    document.getElementById(`'${id}'`).selected = true;
+    document.getElementById(`${id}`).selected = true;
   }
 }

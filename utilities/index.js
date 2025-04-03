@@ -71,13 +71,18 @@ Util.buildDetailPage = async function(data){
 /* **************************************
 * Build the dynamic drop-down list for the add-inventory view
 ************************************** */
-Util.buildClassificationList = async function () {
+Util.buildClassificationList = async function (classification_id = null) {
 	let data = await invModel.getClassifications();
 	let classificationList = '<select name="classification_id" id="classificationList" required>';
 	classificationList += '<option value="">Choose a Classification</option>';
 	data.rows.forEach((row) => {
-		classificationList += `<option value="${row.classification_id}" id="'${row.classification_id}'">${row.classification_name}</option>`;
-		// I couldn't get the if statement to work as intended, so I did it in script.js
+		classificationList += `<option value="${row.classification_id}" id="${row.classification_id}"`;
+		// The if statement works with edit-inventory.ejs but not with add-inventory.ejs
+		// "sticky" select for add-inventory.ejs is in script.js
+		if (classification_id != null && row.classification_id == classification_id) {
+			classificationList += ' selected';
+		}
+		classificationList += `>${row.classification_name}</option>`;
 	});
 	classificationList += '</select>';
 	return classificationList;

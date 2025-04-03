@@ -26,4 +26,19 @@ router.post("/classification", invValidate.addClassificationRules(), invValidate
 // Route to process new vehicle request
 router.post("/inventory", invValidate.addInventoryRules(), invValidate.checkVehicleData, utilities.handleErrors(invController.addVehicleToInventory));
 
+// Get inventory for AJAX Route
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+// Route to build the view for editing vehicle data
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventoryView));
+
+// Route to process vehicle data edit request
+router.post("/update", invValidate.addInventoryRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory));
+
+// Route to build the view for deleting vehicle data
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteFromInventoryView));
+
+// Route to process vehicle data edit request
+router.post("/update/", invValidate.addInventoryRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.delelteFromInventory));
+
 module.exports = router;

@@ -199,7 +199,7 @@ ul {
   width: 100%;
 }
 
-.padding p {
+.padding p, td {
   padding: 10px;
 }
 
@@ -238,12 +238,7 @@ input[type="submit"], input[type="submit"]:valid {
   border: 2px solid #6d6d6d;
 }
 
-#addClassification input[type="submit"] {
-  width: 150px;
-  margin: 5px 0 0;
-}
-
-#addVehicle input[type="submit"] {
+#addClassification input[type="submit"], #addVehicle input[type="submit"], #editVehicle input[type="submit"] {
   width: 150px;
   margin: 5px 0 0;
 }
@@ -280,7 +275,37 @@ form a {
   color: #b60000;
 }
 
-footer {
+#inventoryDisplay {
+  box-sizing: border-box;
+  border: thin solid transparent;
+  border-radius: 1rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+td:nth-of-type(even) {
+  padding: 10px 15px;
+}
+
+thead, tbody tr:nth-of-type(even) {
+  background-color: #f8f8f8;
+}
+
+tbody tr:nth-of-type(odd) {
+  background-color: #eee;
+}
+
+#noGrid {
+  display: inline;
+}
+
+#noGrid #classificationList {
+  width: 200px;
+  margin: 10px 0;
+}
+
+footer, th {
   padding: 5px;
 }
 

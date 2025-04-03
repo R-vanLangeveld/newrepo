@@ -1,0 +1,55 @@
+<!-- Content heading -->
+<% if (title) { %>
+	<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+<% } %>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<form id="editVehicle" action="/inv/update" method="post">
+  <label>Classification
+    <%- classificationList %>
+  </label>
+  <label>Make
+    <input type="text" id="inv_make" name="inv_make" required pattern="[a-zA-z? ]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_make %>">
+  </label>
+  <label>Model
+    <input type="text" id="inv_model" name="inv_model" required pattern="[a-zA-z? ]{3,}" placeholder="Min of 3 characters" value="<%= locals.inv_model %>">
+  </label>
+  <label>Description
+    <textarea id="inv_description" name="inv_description" required><%= locals.inv_description %></textarea>
+  </label>
+  <label>Image Path
+    <input type="text" id="inv_image" name="inv_image" required placeholder="/images/vehicles/no-image.png" value="<%= locals.inv_image %>">
+  </label>
+  <label>Thumbnail Path
+    <input type="text" id="inv_thumbnail" name="inv_thumbnail" required placeholder="/images/vehicles/no-image.png" value="<%= locals.inv_thumbnail %>">
+  </label>
+  <label>Price
+    <input type="text" id="inv_price" name="inv_price" required pattern="[0-9\.]{1,}" placeholder="decimal or integer in this format: 1245.75" value="<%= locals.inv_price %>">
+  </label>
+  <label>Year
+    <input type="text" id="inv_year" name="inv_year" required pattern="[0-9]{4,}" placeholder="4-digit year" value="<%= locals.inv_year %>">
+  </label>
+  <label>Miles
+    <input type="text" id="inv_miles" name="inv_miles" required pattern="[0-9]{1,}" placeholder="digits only" value="<%= locals.inv_miles %>">
+  </label>
+  <label>Color
+    <input type="text" id="inv_color" name="inv_color" required pattern="[a-zA-z]{3,}" value="<%= locals.inv_color %>">
+  </label>
+  <input id="submit" type="submit" value="Update Vehicle" disabled>
+  <input type="hidden" name="inv_id" <% if (locals.inv_id) { %>
+    value="<%= locals.inv_id %>"
+  <% } %>>
+</form>
+
+<script src="../../js/inv-update.js"></script>
