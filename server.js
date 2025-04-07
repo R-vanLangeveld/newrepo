@@ -65,6 +65,14 @@ app.use("/inv", inventoryRoute);
 // Account routes
 app.use("/account", accountRoute);
 
+// Route to process logout
+app.get("/account/logout", (req, res) => {
+  res.clearCookie("jwt");
+	res.locals.loggedin = 0;
+  req.flash("user logout successful");
+  return res.redirect("/");
+});
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: "Sorry, we appear to have lost that page."});

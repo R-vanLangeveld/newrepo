@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const accountModel = require("../models/account-model");
 const Util = {};
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -100,6 +101,7 @@ Util.checkJWTToken = (req, res, next) => {
 				if (err) {
 					req.flash("Please log in");
 					res.clearCookie("jwt");
+					res.locals.loggedin = 0;
 					return res.redirect("/account/login");
 				}
 				res.locals.accountData = accountData;
@@ -120,6 +122,34 @@ Util.checkLogin = (req, res, next) => {
 		next();
 	} else {
 		req.flash("notice", "Please log in.");
+		return res.redirect("/account/login");
+	}
+}
+
+/* ****************************************
+* Check Account Type
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+	if (req.cookies.jwt) {
+		jwt.verify(
+			req.cookies.jwt,
+			process.env.ACCESS_TOKEN_SECRET,
+			function (err, accountData) {
+				if (err) {
+					req.flash("Please log in");
+					return res.redirect("/account/login");
+				}
+				res.locals.accountData = accountData;
+				if (accountData.account_type != "Client") {
+					next();
+				} else {
+					req.flash("Please log in");
+					return res.redirect("/account/login");
+				}
+			}
+		);
+	} else {
+		req.flash("Please log in");
 		return res.redirect("/account/login");
 	}
 }

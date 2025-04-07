@@ -90,4 +90,89 @@ async function buildManagementView(req, res, next) {
 	res.render("account/management", {title: "Account Management", nav, errors: null});
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagementView };
+/* ****************************************
+* Deliver Update Account view
+**************************************** */
+async function buildUpdateAccount(req, res, next) {
+	let nav = await utilities.getNav();
+	
+  const account_id = parseInt(req.params.account_id);
+	const accountInfo = await accountModel.getAccountById(account_id);
+	
+	res.render("account/update", {title: "Edit Account", nav, errors: null, account_id: accountInfo[0].account_id, account_firstname: accountInfo[0].account_firstname, account_lastname: accountInfo[0].account_lastname, account_email: accountInfo[0].account_email});
+}
+
+/* ****************************************
+* Process Account Info Update
+**************************************** */
+async function updateAccountInfo(req, res) {
+	let nav = await utilities.getNav();
+	const { account_id, account_firstname, account_lastname, account_email } = req.body;
+	
+	const updateResult = await accountModel.updateAccountInfo(
+		account_id, 
+		account_firstname, 
+		account_lastname, 
+		account_email
+	);
+
+	const accountData = await accountModel.getAccountById(account_id);
+	if (accountData) {
+		try {
+			delete accountData.account_password;
+			const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, {expiresIn: 3600 * 1000 });
+			if (process.env.NODE_ENV === "development") {
+				res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+			} else {
+				res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		req.flash("notice", "Your account has been updated.");
+		res.render("account/management", {title: "Account Management", nav, errors: null});
+	} else {
+		req.flash("notice", "Sorry, the update failed.")
+		res.status(501).render("account/update", {title: "Edit Account", nav});
+	}
+}
+
+/* ****************************************
+* Process Password Update
+**************************************** */
+async function updateAccountPassword(req, res) {
+	let nav = await utilities.getNav();
+	const { account_id, account_password } = req.body;
+
+	let hashedPassword;
+	try {
+		hashedPassword = await bcrypt.hashSync(account_password, 10);
+	} catch (error) {
+		req.flash("notice", "Sorry, there was a processing error.");
+		res.status(500).render("account/update", {title: "Edit Account", nav, errors: null});
+	}
+
+	const updateResult = await accountModel.updateAccountPassword(account_id, hashedPassword);
+
+	if (updateResult) {
+		const accountData = await accountModel.getAccountById(account_id);
+		try {
+			delete accountData.account_password;
+			const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, {expiresIn: 3600 * 1000 });
+			if (process.env.NODE_ENV === "development") {
+				res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+			} else {
+				res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		req.flash("notice", "Your account has been updated.");
+		res.render("account/management", {title: "Account Management", nav, errors: null});
+	} else {
+		req.flash("notice", "Sorry, the update failed.")
+		res.status(501).render("account/update", {title: "Edit Account", nav});
+	}
+}
+
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagementView, buildUpdateAccount, updateAccountInfo, updateAccountPassword };

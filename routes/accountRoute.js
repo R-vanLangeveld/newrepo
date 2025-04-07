@@ -20,4 +20,13 @@ router.post("/login", regValidate.loginRules(), regValidate.checkLoginData, util
 // Route to build account management view
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagementView));
 
+// Route to build account update view
+router.get("/update", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateAccount));
+
+// Route to process account data update
+router.post("/update/a", regValidate.checkRegData, utilities.handleErrors(accountController.updateAccountInfo));
+
+// Route to process account password update
+router.post("/update/p", regValidate.checkLoginData, utilities.handleErrors(accountController.updateAccountPassword));
+
 module.exports = router;

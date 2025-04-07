@@ -238,7 +238,7 @@ input[type="submit"], input[type="submit"]:valid {
   border: 2px solid #6d6d6d;
 }
 
-#addClassification input[type="submit"], #addVehicle input[type="submit"], #editVehicle input[type="submit"] {
+#submit, #updatePasswordBtn, #updateAccountBtn {
   width: 150px;
   margin: 5px 0 0;
 }
@@ -303,6 +303,11 @@ tbody tr:nth-of-type(odd) {
 #noGrid #classificationList {
   width: 200px;
   margin: 10px 0;
+}
+
+#noGrid form {
+  max-width: 500px;
+  margin: 10px;
 }
 
 footer, th {

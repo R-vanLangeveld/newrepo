@@ -1,4 +1,4 @@
-if (document.querySelector("h1").textContent === "Login" || document.querySelector("h1").textContent === "Register") {
+if (document.querySelector("h1").textContent === "Login" || document.querySelector("h1").textContent === "Register" || document.querySelector("h1").textContent === "Edit Account") {
   const pswdBtn = document.querySelector("#pswdBtn");
   pswdBtn.addEventListener("click", function() {
     const pswdInput = document.getElementById("account_password");

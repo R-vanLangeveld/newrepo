@@ -25,6 +25,9 @@ async function checkExistingEmail(account_email) {
 	}
 }
 
+/* ********************************************
+* Gets account information using account_email
+******************************************** */
 async function getAccountByEmail(account_email) {
 	try {
 		const result = await pool.query("SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1", [account_email]);
@@ -34,4 +37,40 @@ async function getAccountByEmail(account_email) {
 	}
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail };
+/* ********************************************
+* Gets account information using account_id
+******************************************** */
+async function getAccountById(account_id) {
+	try {
+		const sql = await pool.query("SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1", [account_id]);
+		return sql.rows[0];
+	} catch (error) {
+		return error.message;
+	}
+}
+
+/* ********************************************
+* Update account information
+******************************************** */
+async function updateAccountInfo(account_id, account_firstname, account_lastname, account_email) {
+	try {
+		const account = await pool.query("UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *", [account_firstname, account_lastname, account_email, account_id]);
+		return account.rows[0];
+	} catch (error) {
+		return error.message;
+	}
+}
+
+/* ********************************************
+* Update account password
+******************************************** */
+async function updateAccountPassword(account_id, account_password) {
+	try {
+		const account = await pool.query("UPDATE account SET account_password = $1 WHERE account_id = $2 RETURNING *", [account_password, account_id]);
+		return account.rows[0];
+	} catch (error) {
+		return error.message;
+	}
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccountInfo, updateAccountPassword };
