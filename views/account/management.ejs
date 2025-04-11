@@ -14,6 +14,7 @@
 <% if (locals.accountData.account_type != "Client") { %>
 	<h3>Inventory Management</h3>
 	<p><a href="/inv/">Manage Inventory</a></p>
+	<h3>View account lists</h3>
+	<p><a href="/account/accounts">View accounts</a></p>
 <% } %>
-
-<script src="../../js/account.js"></script>
+<script>document.querySelector('main').setAttribute('id', 'noGrid');</script>

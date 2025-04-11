@@ -29,4 +29,7 @@ router.post("/update/a", regValidate.checkRegData, utilities.handleErrors(accoun
 // Route to process account password update
 router.post("/update/p", regValidate.checkLoginData, utilities.handleErrors(accountController.updateAccountPassword));
 
+// Route to build account tables view
+router.get("/accounts", utilities.checkAccountType, utilities.handleErrors(accountController.buildAccountsView));
+
 module.exports = router;

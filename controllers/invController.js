@@ -3,7 +3,7 @@ const utilities = require("../utilities/");
 const invCont = {};
 
 /* ***************************
-*  Build inventory by classification view
+* Build inventory by classification view
 *************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
@@ -15,7 +15,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
-*  Build detail view
+* Build detail view
 *************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
   const inv_id = req.params.invId;
@@ -26,7 +26,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
 }
 
 /* ***************************
-*  Build management view
+* Build management view
 *************************** */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav();
@@ -35,7 +35,7 @@ invCont.buildManagementView = async function (req, res, next) {
 }
 
 /* ***************************
-*  Build new classification view
+* Build new classification view
 *************************** */
 invCont.buildAddNewClassificationView = async function (req, res, next) {
   let nav = await utilities.getNav();
@@ -46,20 +46,22 @@ invCont.buildAddNewClassificationView = async function (req, res, next) {
 * Add classification
 **************************************** */
 invCont.addClassification = async function (req, res) {
-  let nav = await utilities.getNav();
-  const classification_name = req.body;
+  const { classification_name } = req.body;
   const regResult = await invModel.addNewClassification(classification_name);
   if (regResult) {
+    let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash("notice", `${classification_name} has been added`);
-    res.status(201).render("inventory/management", {title: "Vehicle Management", nav});
+    res.status(201).render("inventory/management", {title: "Vehicle Management", nav, errors: null, classificationSelect});
   } else {
+    let nav = await utilities.getNav();
     req.flash("notice", "Sorry, the classification couldn't be added.");
     res.status(501).render("inventory/classification", {title: "New Classification", nav});
   }
 }
 
 /* ***************************
-*  Build new vehicle view
+* Build new vehicle view
 *************************** */
 invCont.buildAddNewVehicleView = async function (req, res, next) {
   let nav = await utilities.getNav();
@@ -78,8 +80,9 @@ invCont.addVehicleToInventory = async function (req, res) {
   );
 
   if (regResult) {
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash("notice", `${inv_make} ${inv_model} has been added to the inventory`);
-    res.status(201).render("inventory/management", {title: "Vehicle Management", nav});
+    res.status(201).render("inventory/management", {title: "Vehicle Management", nav, errors: null, classificationSelect});
   } else {
     req.flash("notice", "Sorry, the vehicle couldn't be added.")
     res.status(501).render("inventory/inventory", {title: "New Vehicle", nav, classificationList: await utilities.buildClassificationList()});
@@ -100,7 +103,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
 }
 
 /* ***************************
-*  Build edit inventory view
+* Build edit inventory view
 *************************** */
 invCont.buildEditInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
@@ -134,7 +137,7 @@ invCont.updateInventory = async function (req, res) {
 }
 
 /* ***************************
-*  Build delete from inventory view
+* Build delete from inventory view
 *************************** */
 invCont.buildDeleteFromInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);

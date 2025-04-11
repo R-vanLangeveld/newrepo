@@ -175,4 +175,14 @@ async function updateAccountPassword(req, res) {
 	}
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagementView, buildUpdateAccount, updateAccountInfo, updateAccountPassword };
+/* ****************************************
+* Deliver account list view
+**************************************** */
+async function buildAccountsView(req, res, next) {
+	let nav = await utilities.getNav();
+	const employees = await utilities.buildEmployeeTable();
+	const clients = await utilities.buildClientTable();
+	res.render("account/account-list", {title: "Accounts", nav, errors: null, employees, clients});
+}
+
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildManagementView, buildUpdateAccount, updateAccountInfo, updateAccountPassword, buildAccountsView };

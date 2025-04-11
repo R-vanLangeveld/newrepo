@@ -78,8 +78,6 @@ Util.buildClassificationList = async function (classification_id = null) {
 	classificationList += '<option value="">Choose a Classification</option>';
 	data.rows.forEach((row) => {
 		classificationList += `<option value="${row.classification_id}" id="${row.classification_id}"`;
-		// The if statement works with edit-inventory.ejs but not with add-inventory.ejs
-		// "sticky" select for add-inventory.ejs is in script.js
 		if (classification_id != null && row.classification_id == classification_id) {
 			classificationList += ' selected';
 		}
@@ -152,6 +150,43 @@ Util.checkAccountType = (req, res, next) => {
 		req.flash("Please log in");
 		return res.redirect("/account/login");
 	}
+}
+
+/* ****************************************
+* Build Employee Table
+**************************************** */
+Util.buildEmployeeTable = async function (req, res, next) {
+	let data = await accountModel.getNonClients();
+	let dataTable = '<thead>';
+	dataTable += '<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Account Type</th></tr>';
+	dataTable += '</thead>';
+	dataTable += '<tbody>';
+	data.rows.forEach(function (element) {
+		dataTable += `<tr><td>${element.account_firstname}</td>`;
+		dataTable += `<td>${element.account_lastname}</td>`;
+		dataTable += `<td>${element.account_email}</td>`;
+		dataTable += `<td>${element.account_type}</td></tr>`;
+	});
+	dataTable += '</tbody>';
+	return dataTable;
+}
+
+/* ****************************************
+* Build Client Table
+**************************************** */
+Util.buildClientTable = async function (req, res, next) {
+	let data = await accountModel.getClients();
+	let dataTable = '<thead>';
+	dataTable += '<tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>';
+	dataTable += '</thead>';
+	dataTable += '<tbody>';
+	data.rows.forEach(function (element) {
+		dataTable += `<tr><td>${element.account_firstname}</td>`;
+		dataTable += `<td>${element.account_lastname}</td>`;
+		dataTable += `<td>${element.account_email}</td></tr>`;
+	});
+	dataTable += '</tbody>';
+	return dataTable;
 }
 
 /* ****************************************

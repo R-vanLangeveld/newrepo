@@ -1,0 +1,21 @@
+<!-- Content heading -->
+<% if (title) { %>
+	<h1><%= title %></h1>
+<% } else {
+	res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<!-- Employee accounts display -->
+<table id="employeeTable">
+	<caption>Employees</caption>
+	<%- employees %>
+</table>
+<!-- Client accounts display -->
+<table id="clientTable">
+	<caption>Clients</caption>
+	<%- clients %>
+</table>
+
+<script>document.querySelector('main').setAttribute('id', 'noGrid');</script>

@@ -1,7 +1,5 @@
 'use strict'
 
-document.querySelector('main').setAttribute('id', 'noGrid');
-
 // Get a list of items in inventory based on the classification_id
 let classificationList = document.querySelector('#classificationList');
 classificationList.addEventListener('change', function () {
@@ -27,13 +25,10 @@ classificationList.addEventListener('change', function () {
 // Build inventory items into HTML table components and inject into DOM
 function buildInventoryList(data) {
 	let inventoryDisplay = document.getElementById('inventoryDisplay');
-	// Set up the table labels
 	let dataTable = '<thead>';
 	dataTable += '<tr><th>Vehicle Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>';
 	dataTable += '</thead>';
-	// Set up the table body
 	dataTable += '<tbody>';
-	// Iterate over all vehicles in the array and put each in a row
 	data.forEach(function (element) {
 		console.log(`${element.inv_id}, ${element.inv_model}`);
 		dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`;
@@ -41,6 +36,5 @@ function buildInventoryList(data) {
 		dataTable += `<td><a href="/inv/delete/${element.inv_id}" title="Click to delete">Delete</a></td></tr>`;
 	});
 	dataTable += '</tbody>';
-	// Display the contents in the Inventory Management view
 	inventoryDisplay.innerHTML = dataTable;
 }

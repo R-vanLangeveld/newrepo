@@ -25,12 +25,14 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 5px 5px 20px;
-  height: 63px;
+  padding: 5px 5px 10px;
+  max-height: 91px;
+  height: fit-content;
 }
 
 .siteName {
-  height: 38px;
+  max-height: 76px;
+  height: fit-content;
 }
 
 .siteName a {
@@ -40,47 +42,55 @@ body {
   text-decoration: none;
 }
 
+#tools {
+  display: flex;
+  flex-direction: column;
+  max-height: 76px;
+}
+
 #tools a {
   color: #000;
+  margin: 5px;
   text-decoration: none;
 }
 
 nav {
   background-color: #121a2e;
-  color: #fff;
+  display: block;
+  min-height: 45px;
+  height: fit-content;
 }
 
 nav ul {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 45px;
+  justify-content: flex-start;
+  gap: 10px;
   padding: 5px 0;
 }
 
 nav li {
   padding: 0;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav a {
   padding: 8px;
   color: #fff;
-  text-decoration-color: #121a2e;
+  text-decoration-color: transparent;
 }
 
-nav a:visited {
+nav a:visited, nav a:hover:visited {
   text-decoration-color: #bd9100;
 }
 
 nav a:hover {
   color: #121a2e;
   background-color: #fff;
-  text-decoration-color: #fff;
-}
-
-nav a:hover:visited {
-  text-decoration-color: #bd9100;
 }
 
 main {
@@ -109,7 +119,7 @@ picture img {
 .carInfo {
   background-color: #fffb;
   position: absolute;
-  top: 90px;
+  top: 135px;
   left: 15px;
 }
 
@@ -199,7 +209,7 @@ ul {
   width: 100%;
 }
 
-.padding p, td {
+.padding p {
   padding: 10px;
 }
 
@@ -275,7 +285,7 @@ form a {
   color: #b60000;
 }
 
-#inventoryDisplay {
+#inventoryDisplay, #employeeTable, #clientTable {
   box-sizing: border-box;
   border: thin solid transparent;
   border-radius: 1rem;
@@ -284,8 +294,47 @@ form a {
   overflow: hidden;
 }
 
-td:nth-of-type(even) {
-  padding: 10px 15px;
+#employeeTable, #clientTable {
+  margin: 10px 0;
+  padding: 5px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+#employeeTable thead tr th, #clientTable thead tr th, #employeeTable tbody tr:last-of-type td, #clientTable tbody tr:last-of-type td {
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+#employeeTable thead tr th:last-of-type, #clientTable thead tr th:last-of-type {
+  border-top-right-radius: 1rem;
+  border-top: thin solid transparent;
+}
+
+#employeeTable thead tr th:first-of-type, #clientTable thead tr th:first-of-type {
+  border-top-left-radius: 1rem;
+  border-top: thin solid transparent;
+}
+
+#employeeTable tbody tr:last-of-type td:last-of-type, #clientTable tbody tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 1rem;
+  border-bottom: thin solid transparent;
+}
+
+#employeeTable tbody tr:last-of-type td:first-of-type, #clientTable tbody tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 1rem;
+  border-bottom: thin solid transparent;
+}
+
+caption {
+  padding: 5px;
+  font-weight: bold;
+}
+
+td, th {
+  padding: 5px 10px 5px 5px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
 }
 
 thead, tbody tr:nth-of-type(even) {
@@ -297,7 +346,7 @@ tbody tr:nth-of-type(odd) {
 }
 
 #noGrid {
-  display: inline;
+  display: block;
 }
 
 #noGrid #classificationList {
@@ -310,8 +359,30 @@ tbody tr:nth-of-type(odd) {
   margin: 10px;
 }
 
-footer, th {
+h3 {
+  padding-top: 20px;
+}
+
+footer, td:last-of-type, th:last-of-type {
   padding: 5px;
+}
+
+@media screen and (min-width: 400px) {
+  
+  #tools {
+    flex-direction: row;
+  }
+
+  .carInfo {
+    top: 135px;
+  }
+}
+
+@media screen and (min-width: 417px) {
+  
+  .carInfo {
+    top: 105px;
+  }
 }
 
 @media screen and (min-width: 531px) {
@@ -322,7 +393,7 @@ footer, th {
     border: #00bfd5 thick solid;
     border-radius: 1rem;
     max-width: 750px;
-    width: 90%;
+    width: 95%;
   }
 
   #top-header {
@@ -339,10 +410,6 @@ footer, th {
 
   h1, picture, #inv-display, .notice, #messages {
     grid-column: 1/3;
-  }
-  
-  .carInfo {
-    top: 115px;
   }
 
   .carInfo img {
